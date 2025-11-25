@@ -7,7 +7,6 @@ import torch
 from metasim.constants import PhysicStateType
 from metasim.scenario.objects import ArticulationObjCfg, RigidObjCfg
 from metasim.scenario.scenario import ScenarioCfg
-from metasim.scenario.scene import SceneCfg
 from metasim.task.registry import register_task
 from metasim.types import TensorState
 
@@ -78,17 +77,13 @@ class LiberoKitchenScene10CloseTopDrawerAndPutBowlOnTopTask(Libero90BaseTask):
             ),
         ],
         robots=["franka"],
-        scene=SceneCfg(
-            name="libero_kitchen_tabletop",
-            mjcf_path="roboverse_data/assets/libero/scenes/libero_tabletop_base_style.xml",
-        ),
     )
 
     max_episode_steps = 400
     task_desc = "Close the top drawer of the cabinet and put the black bowl on top of it (scene10)"
 
     workspace_name = ("kitchen_table",)
-    workspace_offset = ((0.0, 0, 0.90),)
+    workspace_offset = ((0, 0, 0),)
     workspace_size = ((1.0, 1.2, 0.05),)
 
     traj_filepath = "roboverse_data/trajs/libero90/libero_90_kitchen_scene10_close_the_top_drawer_of_the_cabinet_and_put_the_black_bowl_on_top_of_it_traj_v2.pkl"

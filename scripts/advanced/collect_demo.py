@@ -5,9 +5,12 @@ from copy import deepcopy
 from dataclasses import dataclass, field
 from typing import Literal
 
+import rootutils
 import tyro
 from loguru import logger as log
 from rich.logging import RichHandler
+
+rootutils.setup_root(__file__, pythonpath=True)
 
 log.configure(handlers=[{"sink": RichHandler(), "format": "{message}"}])
 

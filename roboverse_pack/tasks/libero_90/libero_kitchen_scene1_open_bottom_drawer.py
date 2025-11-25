@@ -6,7 +6,6 @@ from metasim.constants import PhysicStateType
 from metasim.example.example_pack.tasks.checkers import JointPosChecker
 from metasim.scenario.objects import ArticulationObjCfg, RigidObjCfg
 from metasim.scenario.scenario import ScenarioCfg
-from metasim.scenario.scene import SceneCfg
 from metasim.task.registry import register_task
 
 from .libero_90_base import Libero90BaseTask
@@ -62,11 +61,7 @@ class LiberoKitchenOpenBottomDrawerTask(Libero90BaseTask):
             ),
         ],
         robots=["franka"],
-        # Scene configuration (from BDDL problem domain)
-        scene=SceneCfg(
-            name="libero_kitchen_tabletop",
-            mjcf_path="roboverse_data/assets/libero/scenes/libero_tabletop_base_style.xml",
-        ),
+        # Scene configuration (from BDDL problem domain),
     )
 
     # Task parameters
@@ -75,7 +70,7 @@ class LiberoKitchenOpenBottomDrawerTask(Libero90BaseTask):
 
     # Workspace configuration (from BDDL regions)
     workspace_name = ("kitchen_table",)
-    workspace_offset = ((0.0, 0, 0.90),)  # kitchen_table_offset
+    workspace_offset = ((0, 0, 0),)  # kitchen_table_offset
     workspace_size = ((1.0, 1.2, 0.05),)  # kitchen_table_full_size
 
     # Checker: bottom drawer must be open
@@ -88,7 +83,9 @@ class LiberoKitchenOpenBottomDrawerTask(Libero90BaseTask):
     )
 
     # Trajectory file path
-    traj_filepath = "roboverse_data/trajs/libero90/libero_90_kitchen_scene1_traj_v2.pkl"
+    traj_filepath = (
+        "roboverse_data/trajs/libero90/libero_90_kitchen_scene1_open_the_bottom_drawer_of_the_cabinet_traj_v2.pkl"
+    )
 
     # # rewrite terminate
     # def _terminated(self, states: TensorState) -> torch.Tensor:
