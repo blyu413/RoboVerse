@@ -70,7 +70,9 @@ class LiberoLivingRoomScene6PutWhiteMugOnThePlateTask(Libero90BaseTask):
     workspace_offset = ((0.0, 0, 0.42),)
     workspace_size = ((1.0, 1.2, 0.1),)
 
-    traj_filepath = "roboverse_data/trajs/libero90/libero_90_living_room_scene6_put_the_white_mug_on_the_plate_traj_v2.pkl"
+    traj_filepath = (
+        "roboverse_data/trajs/libero90/libero_90_living_room_scene6_put_the_white_mug_on_the_plate_traj_v2.pkl"
+    )
 
     def _terminated(self, states: TensorState) -> torch.Tensor:
         """Task success checker."""
@@ -89,4 +91,3 @@ class LiberoLivingRoomScene6PutWhiteMugOnThePlateTask(Libero90BaseTask):
         """Skip checker reset."""
         states = super(Libero90BaseTask, self).reset(states, env_ids)
         return states
-

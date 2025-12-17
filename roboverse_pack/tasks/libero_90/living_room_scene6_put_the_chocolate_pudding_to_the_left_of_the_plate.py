@@ -94,4 +94,3 @@ class LiberoLivingRoomScene6PutTheChocolatePuddingToTheLeftOfPlateTask(Libero90B
         """Skip checker reset."""
         states = super(Libero90BaseTask, self).reset(states, env_ids)
         return states
-

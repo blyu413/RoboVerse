@@ -94,18 +94,16 @@ class LiberoStudyScene4PickUpTheBookOnTheLeftAndPlaceItOnTopOfTheShelfTask(Liber
         shelf_top_R = (
             torch.from_numpy(shelf_top_mat).float().reshape(3, 3).unsqueeze(0).expand(N, 3, 3).to(book_pos.device)
         )  # (N,3,3)
-        shelf_top_t = (
-            torch.from_numpy(shelf_top_pos).float().unsqueeze(0).expand(N, 3).to(book_pos.device)
-        )  # (N,3)
+        shelf_top_t = torch.from_numpy(shelf_top_pos).float().unsqueeze(0).expand(N, 3).to(book_pos.device)  # (N,3)
 
         # top_side site half-size from wooden_two_layer_shelf.xml: size="0.03272 0.05000 0.11027"
         bbox_lower = torch.tensor([-0.03272, -0.05000, -0.11027], device=book_pos.device)
         bbox_upper = torch.tensor([0.03272, 0.05000, 0.11027], device=book_pos.device)
 
         # Transform book position to shelf top_side local frame
-        book_local = torch.matmul(
-            shelf_top_R.transpose(1, 2), (book_pos - shelf_top_t).unsqueeze(-1)
-        ).squeeze(-1)  # (N,3)
+        book_local = torch.matmul(shelf_top_R.transpose(1, 2), (book_pos - shelf_top_t).unsqueeze(-1)).squeeze(
+            -1
+        )  # (N,3)
         ge_lower = book_local >= bbox_lower  # (N,3)
         le_upper = book_local <= bbox_upper  # (N,3)
         inside = (ge_lower & le_upper).all(dim=-1)

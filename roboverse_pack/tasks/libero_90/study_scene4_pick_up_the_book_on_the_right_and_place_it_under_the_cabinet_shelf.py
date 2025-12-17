@@ -103,9 +103,9 @@ class LiberoStudyScene4PickUpTheBookOnTheRightAndPlaceItUnderTheCabinetShelfTask
         bbox_upper = torch.tensor([0.03272, 0.05000, 0.11027], device=book_pos.device)
 
         # Transform book position to shelf bottom_region local frame
-        book_local = torch.matmul(
-            shelf_bottom_R.transpose(1, 2), (book_pos - shelf_bottom_t).unsqueeze(-1)
-        ).squeeze(-1)  # (N,3)
+        book_local = torch.matmul(shelf_bottom_R.transpose(1, 2), (book_pos - shelf_bottom_t).unsqueeze(-1)).squeeze(
+            -1
+        )  # (N,3)
         ge_lower = book_local >= bbox_lower  # (N,3)
         le_upper = book_local <= bbox_upper  # (N,3)
         inside = (ge_lower & le_upper).all(dim=-1)

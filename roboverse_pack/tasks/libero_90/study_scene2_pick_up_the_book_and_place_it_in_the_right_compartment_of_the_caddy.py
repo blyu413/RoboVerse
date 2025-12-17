@@ -35,6 +35,7 @@ class LiberoStudyScene2PickUpTheBookAndPlaceInRightCompartmentOfTheCaddyTask(Lib
 
     Goal: Place black_book inside desk_caddy/right_contain_region.
     """
+
     scenario = ScenarioCfg(
         objects=[
             RigidObjCfg(

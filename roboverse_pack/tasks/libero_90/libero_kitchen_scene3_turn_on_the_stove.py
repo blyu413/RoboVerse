@@ -83,7 +83,7 @@ class LiberoKitchenScene3TurnOnTheStoveTask(Libero90BaseTask):
     def _terminated(self, states: TensorState) -> torch.Tensor:
         """Task success checker."""
         # knob_index and threshold need to be aligned with the actual stove model used
-        knob_index = 0 
+        knob_index = 0
         threshold = 0.5
         stove_joint_state = states.objects["flat_stove"].joint_pos[:, 0]  # (N,)
         is_on = (stove_joint_state > threshold).all(dim=-1)  # (N,)

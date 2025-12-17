@@ -89,7 +89,6 @@ class LiberoKitchenScene3PutTheFryingPanOnTheStoveTask(Libero90BaseTask):
             torch.tensor(stove_center_single, device=frypan_pos.device).reshape(1, 3).repeat(N, 1)
         )  # (N,3)
 
-
         # Check if frying pan is within a region above the stove
         range_threshold = 0.08  # Radius of the range in xy plane
         height_threshold = 0.03  # Height threshold above the stove
@@ -98,7 +97,6 @@ class LiberoKitchenScene3PutTheFryingPanOnTheStoveTask(Libero90BaseTask):
         xy_distance = torch.norm(frypan_pos[:, :2] - stove_center_pos[:, :2], dim=-1)  # (N,)
         # Calculate height difference (frypan z - stove z)
         height_diff = frypan_pos[:, 2] - stove_center_pos[:, 2]  # (N,)
-        print(xy_distance, height_diff)
         # Check both conditions: xy distance < range AND 0 < height_diff < height_threshold
         xy_close = xy_distance < range_threshold  # (N,)
         height_valid = (height_diff > 0) & (height_diff < height_threshold)  # (N,)
